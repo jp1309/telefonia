@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefonia Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- PapaParse for CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h1>Telefonia Insights</h1>
+                </div>
+                <nav class="top-nav">
+                    <button class="nav-btn active" data-source="output/lineas_por_servicio_long.csv">Por
+                        Servicio</button>
+                    <button class="nav-btn" data-source="output/lineas_por_modalidad_fact.csv">Por Modalidad</button>
+                </nav>
+            </div>
+            <p class="subtitle">Análisis de Líneas Activas por Servicio en Ecuador</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-grid">
+
+            <!-- Controls / Filters Sidebar -->
+            <aside class="controls-panel glass-card">
+                <h2>Filtros</h2>
+                <!-- Removed Dataset Select -->
+
+                <div class="filter-group">
+                    <label for="companySelect">Empresa</label>
+                    <select id="companySelect">
+                        <option value="ALL">Total</option>
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="categorySelect">Servicio</label>
+                    <select id="categorySelect">
+                        <option value="ALL">Total</option>
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>|
+                <div class="stats-summary">
+                    <h3>Resumen (Último Mes)</h3>
+                    <div id="summaryCards">
+                        <!-- Summary cards populated by JS -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chart Area -->
+            <section class="chart-panel glass-card">
+                <div class="chart-header">
+                    <h2>Evolución Histórica</h2>
+                    <div class="chart-toggles">
+                        <button class="toggle-btn active" data-type="line">Línea</button>
+                        <button class="toggle-btn" data-type="bar">Barra</button>
+                    </div>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>

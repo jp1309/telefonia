@@ -1,0 +1,38 @@
+name: Actualizacion Mensual Datos Telefonia
+
+on:
+  schedule:
+    # Ejecutar a las 12:00 UTC el día 20 de cada mes
+    - cron: '0 12 20 * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente desde GitHub para probar
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Permiso necesario para hacer commit y push
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas openpyxl requests beautifulsoup4
+
+      - name: Ejecutar Pipeline de Actualización
+        run: python update_pipeline.py
+
+      - name: Commit y Push de cambios
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add datos_descargados/*.xlsx output/*.csv
+          # Solo hacer commit si hay cambios
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Datos telefonia mensual" && git push)
