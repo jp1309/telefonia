@@ -69,4 +69,4 @@ Este repositorio incluye un flujo de trabajo (`.github/workflows/monthly_update.
 *   `style.css`: Estilos visuales (Modo oscuro, Glassmorphism).
 
 ---
-Desarrollado con ❤️ para el análisis de datos abiertos en Ecuador.
+Desarrollado con 🧠 para el análisis de datos abiertos en Ecuador.
